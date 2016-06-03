@@ -1,10 +1,12 @@
-[![Build Status](https://travis-ci.org/spencer516/ember-d3-scale.svg?branch=master)](https://travis-ci.org/spencer516/ember-d3-scale)
-[![Code Climate](https://codeclimate.com/github/spencer516/ember-d3-scale/badges/gpa.svg)](https://codeclimate.com/github/spencer516/ember-d3-scale)
-[![Ember Observer Score](http://emberobserver.com/badges/ember-d3-scale.svg)](http://emberobserver.com/addons/ember-d3-scale)
+[![Build Status](https://travis-ci.org/LocusEnergy/ember-d3-helpers.svg?branch=master)](https://travis-ci.org/LocusEnergy/ember-d3-helpers)
 
-# Ember-d3-scale
+<!-- [![Code Climate](https://codeclimate.com/github/spencer516/ember-d3-helpers/badges/gpa.svg)](https://codeclimate.com/github/spencer516/ember-d3-helpers)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-d3-helpers.svg)](http://emberobserver.com/addons/ember-d3-helpers)
+ -->
 
-This library provides a suite of Ember helpers around the d3 scale library. Support for more features is ongoing.
+# ember-d3-helpers
+
+This library provides a suite of Ember helpers around the d3v4 API. Support for more features is ongoing.
 
 ## Configuration
 
@@ -12,7 +14,7 @@ Currently, there are no configuration options for this addon in `config/environm
 
 ## Live Examples
 
-You can view a demo of a few ways to use these helpers [here](http://spencer516.github.io/ember-d3-scale)
+You can view a demo of a few ways to use these helpers [here](http://locusenergy.github.io/ember-d3-helpers)
 
 ## Available Helpers
 

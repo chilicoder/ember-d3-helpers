@@ -1,1 +1,1 @@
-export { default, bandScale } from 'ember-d3-scale/helpers/band-scale';
+export { default, bandScale } from 'ember-d3-helpers/helpers/band-scale';

@@ -1,1 +1,1 @@
-export { default, immutArray } from 'ember-d3-scale/helpers/immut-array';
+export { default, immutArray } from 'ember-d3-helpers/helpers/immut-array';

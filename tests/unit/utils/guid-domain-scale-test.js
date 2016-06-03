@@ -1,4 +1,4 @@
-import guidDomainScale from 'ember-d3-scale/utils/guid-domain-scale';
+import guidDomainScale from 'ember-d3-helpers/utils/guid-domain-scale';
 import { scaleBand } from 'd3-scale';
 import { module, test } from 'qunit';
 

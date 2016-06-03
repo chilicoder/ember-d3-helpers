@@ -41,7 +41,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.locationType = 'hash';
-    ENV.baseURL = '/ember-d3-scale/';
+    ENV.baseURL = '/ember-d3-helpers/';
 
   }
 

@@ -1,4 +1,4 @@
-import addOptionsToOrdinalScale from 'ember-d3-scale/utils/add-options-to-ordinal-scale';
+import addOptionsToOrdinalScale from 'ember-d3-helpers/utils/add-options-to-ordinal-scale';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | add options to ordinal scale');

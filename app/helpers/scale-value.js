@@ -1,1 +1,1 @@
-export { default, scaleValue } from 'ember-d3-scale/helpers/scale-value';
+export { default, scaleValue } from 'ember-d3-helpers/helpers/scale-value';

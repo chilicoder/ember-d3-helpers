@@ -1,1 +1,1 @@
-export { default, catColorScale } from 'ember-d3-scale/helpers/cat-color-scale';
+export { default, catColorScale } from 'ember-d3-helpers/helpers/cat-color-scale';
