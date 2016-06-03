@@ -25,7 +25,7 @@ const WHITELIST = {
   '20c': true
 };
 
-export function catColorScale([type, domain], hash) {
+export function catColorScale([type, domain]) {
   let capType = type.toString().toLowerCase();
   assert(`${type} is not a valid sequential color scale name`, capType in WHITELIST);
 

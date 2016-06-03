@@ -2,5 +2,6 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-d3-helpers'
+  name: 'ember-d3-helpers',
+  included: function() {}
 };

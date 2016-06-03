@@ -27,7 +27,7 @@ const SCALES = {
   scaleCubehelix
 };
 
-export function seqColorScale([type, domain], hash) {
+export function seqColorScale([type, domain]) {
   let capType = `scale${capitalize(type.toString().toLowerCase())}`;
   assert(`${type} is not a valid sequential color scale name`, capType in SCALES);
 
