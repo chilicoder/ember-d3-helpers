@@ -17,7 +17,16 @@ Currently, there are no configuration options for this addon in `config/environm
 You can view a demo of a few ways to use these helpers [here](http://locusenergy.github.io/ember-d3-helpers)
 
 ## Available Helpers
-
+* [Selection Helpers]
+  - [`d3-select`](#d3-select)
+  - [`d3-select-all`](#d3-select-all)
+  - [`d3-join`](#d3-join)
+  - [`d3-attr`](#d3-attr)
+  - [`d3-call`](#d3-call)
+* [Transition Helpers]
+  - [`d3-transition`](#d3-transition)
+  - [`d3-transition-delay`](#d3-transition-delay)
+  - [`d3-attr-tween`](#d3-attr-tween)
 * [Linear Scales](#linear-scales)
 	- [`linear-scale`](#linear-scale)
 	- [`time-scale`](#time-scale)
@@ -34,6 +43,138 @@ You can view a demo of a few ways to use these helpers [here](http://locusenergy
 	- [`time-interval`](#time-interval)
 
 ## Usage
+
+### Selection Helpers
+
+#### `(d3-select selector)`
+[D3 Select](https://github.com/d3/d3-selection#select)
+
+Select an element matching selector and return a selection object.
+
+```hbs
+{{shhh (compute (pipe 
+  (d3-select "#my-link")
+  (d3-attr "name" "fred")
+  ))
+}}
+```
+
+#### `(d3-select-all selector)`
+[D3 Select All](https://github.com/d3/d3-selection#selectAll)
+
+Selects all elements that match the specified selector string.
+
+```hbs
+{{shhh (compute (pipe
+    (d3-select-all "rect")
+    (d3-join data)
+    (d3-style "color" "red")
+  ))
+}}
+```
+
+#### `(d3-join selector data accessor [enter=] [update=] [exit=])`
+
+Helper for implementing D3's general update pattern. This helper doesn't have a corresponding function in the API because 
+this helper represents a pattern rather than a specific function in the API. Use it when you need to specify `selection.enter().update().exit()`.
+
+Read more about [D3's General Update Pattern](https://bl.ocks.org/mbostock/3808218). 
+
+```hbs
+{{shhh (compute (pipe
+    (d3-select 'svg')
+    (d3-join 'rect' data
+      enter=(pipe
+        (d3-append 'rect')
+        (d3-text (r/param))
+      )
+      update=(pipe
+        (d3-text (r/param))
+      )
+      exit=(pipe
+        (d3-remove)
+      )
+    )
+  ))
+}}
+```
+
+#### `(d3-attr name value)`
+[D3 Attr](https://github.com/d3/d3-selection#selection_attr)
+
+Set attribute with specified name to specified value. Value can be a string or a function.
+
+```hbs
+{{shhh (compute (pipe
+    (d3-select ".myelement")
+    (d3-attr "name" name)
+  ))
+}}
+```
+
+#### `(d3-call (pipe ...))`
+[D3 Call](https://github.com/d3/d3-selection#selection_call)
+
+Invokes the specified function exactly once, passing in this selection along with any optional arguments.
+
+```hbs
+{{shhh (compute (pipe 
+    (d3-select ".test-items")
+    (d3-call (pipe 
+      (d3-select-all ".car")
+      (d3-attr "color" "red")
+    ))
+    (d3-call (pipe
+      (d3-select-all ".boat")
+      (d3-attr "color" "blue")
+    ))
+    (d3-append 'i')
+    (d3-attr "class" "truck")
+  ))
+}}
+```
+
+### Transition Helpers
+
+#### `(d3-transition [transition])`
+[D3 Transition](https://github.com/d3/d3-transition/blob/master/README.md#transition)
+
+Apply transition to a selection. Transition can be a name for this transition or a parent transition. 
+
+```hbs
+{{d3-join 'rect' data
+  enter=(pipe
+    (d3-append 'rect')
+    (d3-attr height)
+    (d3-transition)
+    (d3-attr (r/get 'y'))
+  )
+}}
+```
+
+#### `(d3-transition-delay amount)`
+[D3 Transition Delay](https://github.com/d3/d3-transition/blob/master/README.md#transition_delay)
+
+Apply a delay to a transition. Must be chained behind a transition.
+
+```hbs
+{{d3-join 'rect' data
+  enter=(pipe
+    (d3-append 'rect')
+    (d3-attr height)
+    (d3-transition)
+    (d3-delay 300)
+    (d3-attr (r/get 'y'))
+  )
+}}
+```
+
+#### `(d3-attr-tween)`
+[D3 Attr Tween](https://github.com/d3/d3-transition/blob/master/README.md#transition_attrTween)
+
+For each selected element, creates a tween for the attribute with the specified name with the specified interpolator value. 
+
+Good description of `transition.attrTween` can be found in [this example](http://bl.ocks.org/cmdoptesc/6228457).
 
 ### Linear scales
 
