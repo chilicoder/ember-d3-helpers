@@ -73,6 +73,26 @@ Selects all elements that match the specified selector string.
 }}
 ```
 
+#### `(d3-data data [key])`
+[D3 Data](https://github.com/d3/d3-selection#selection_data)
+
+Joins the specified array of data with the selected elements, returning a new selection that it represents the update selection: the elements successfully bound to data.
+
+```hbs
+{{shhh (compute (pipe
+    (d3-select "svg")
+    (d3-select-all "rect")
+    (d3-data data key)
+    (d3-join 
+      enter=(pipe
+        (d3-append "rect")
+        (d3-text (r/get "number"))
+      )
+    )
+  ))
+}}
+```
+
 #### `(d3-join selector data accessor [enter=] [update=] [exit=])`
 
 Helper for implementing D3's general update pattern. This helper doesn't have a corresponding function in the API because 
@@ -82,10 +102,12 @@ Read more about [D3's General Update Pattern](https://bl.ocks.org/mbostock/38082
 
 ```hbs
 {{shhh (compute (pipe
-    (d3-select 'svg')
-    (d3-join 'rect' data
+    (d3-select "svg")
+    (d3-select-all "rect")
+    (d3-data data)
+    (d3-join
       enter=(pipe
-        (d3-append 'rect')
+        (d3-append "rect")
         (d3-text (r/param))
       )
       update=(pipe
