@@ -8,19 +8,14 @@ moduleForComponent('d3-attr', 'Integration | Helper | d3-attr', {
 test('applies attribute to selection', function(assert) {
   // Template block usage:
   this.render(hbs`
-    <span class="test-element"></span>
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select ".test-element")
-          (d3-attr "name" "applied")
-        ))
-      }}
-    {{/if}}
+    {{d3-graph (pipe
+      (d3-attr "name" "applied")
+    )}}
   `);
 
   this.set('ready', true);
 
-  assert.equal(this.$('.test-element').attr('name'), 'applied');
+  assert.equal(this.$('g').attr('name'), 'applied');
 });
 
 test('updates element when bound property changes', function(assert){
@@ -29,21 +24,16 @@ test('updates element when bound property changes', function(assert){
 
   // Template block usage:
   this.render(hbs`
-    <span class="test-element"></span>
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select ".test-element")
-          (d3-attr "name" name)
-        ))
-      }}
-    {{/if}}
+    {{d3-graph (pipe
+      (d3-attr "name" name)
+    )}}
   `);
 
   this.set('ready', true);
 
-  assert.equal(this.$('.test-element').attr('name'), 'initial value');
+  assert.equal(this.$('g').attr('name'), 'initial value');
 
   this.set('name', 'updated value');
 
-  assert.equal(this.$('.test-element').attr('name'), 'updated value');
+  assert.equal(this.$('g').attr('name'), 'updated value');
 });

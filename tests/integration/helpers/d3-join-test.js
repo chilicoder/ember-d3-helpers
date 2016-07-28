@@ -21,8 +21,7 @@ test('it renders', function(assert) {
         )
       )
     )}}
-`);
-
+  `);
 
   assert.equal(this.$('rect').length, 4, "four rectanges were rendered");
   assert.ok(this.$('rect:contains(red)').length);
@@ -38,9 +37,11 @@ test('it updated', function(assert) {
   // Template block usage:
   this.render(hbs`
     {{d3-graph (pipe
-      (d3-join 'rect' data
+      (d3-select-all "rect")
+      (d3-data data)
+      (d3-join
         enter=(pipe
-          (d3-append 'rect')
+          (d3-append "rect")
           (d3-text (r/param))
         )
         update=(pipe
@@ -52,6 +53,8 @@ test('it updated', function(assert) {
       )
     )}}
   `);
+
+  this.set('ready', true);
 
   assert.equal(this.$('rect').length, 4, "four rectanges were rendered");
   assert.ok(this.$('rect:contains(red)').length);

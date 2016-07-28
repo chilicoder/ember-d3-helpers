@@ -1,3 +1,6 @@
 {{#if selection}}
-  {{shhh (compute graph selection)}}
+  {{yield selection}}
+  {{#if graph}}
+    {{shhh (compute graph selection)}}
+  {{/if}}
 {{/if}}
