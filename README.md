@@ -47,8 +47,10 @@ You can view a demo of a few ways to use these helpers [here](http://locusenergy
 
 ### `{{d3-graph graph}}`
 
-`d3-graph` is the only component in this addon. It's used to provide root level selection where your graph will be rendered.
-By default, it's rendered as `g` element. You can change this with by specifying the component's `tagName` (ie `{{d3-graph (pipe ...) tagName="svg"}}`).
+`d3-graph` is the only component in this addon. It's used to provide root level 
+selection to render discrete D3 elements, such as SVG `<svg>` and groups `<g>`. 
+You can change this with by specifying the component's `tagName` 
+(ie `{{d3-graph (pipe ...) tagName="svg"}}`).
 
 It can be used inline.
 
