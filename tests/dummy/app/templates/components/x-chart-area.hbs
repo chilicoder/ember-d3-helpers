@@ -1,0 +1,64 @@
+{{#with (letter-frequency data) as |letters|}}
+
+  {{#with (hash
+
+    xScale=(band-scale
+      letters
+      (append 0 width)
+    )
+
+    yScale=(linear-scale
+      (append 0 10)
+      (append height 0)
+    )
+
+  ) as |scales|}}
+
+    {{#if d3el}}
+
+      {{shh
+        (compute
+          (pipe
+            (d3-select-all 'path')
+            (d3-data (array letters))
+            (d3-join
+              enter=(pipe
+                (d3-append 'g')
+                (d3-append 'path')
+                (d3-attr 'class' 'area')
+                (d3-style 'fill' 'steelblue')
+                (d3-attr 'd'
+                  (d3-area
+                    scales.xScale
+                    scales.yScale
+                    xAccessor=xAccessor
+                    yAccessor=yAccessor
+                  )
+                )
+              )
+              update=(pipe
+                  (d3-attr 'class' 'area')
+                  (d3-style 'fill' 'steelblue')
+                  (d3-attr 'd'
+                    (d3-area
+                      scales.xScale
+                      scales.yScale
+                      xAccessor=xAccessor
+                      yAccessor=yAccessor
+                    )
+                  )
+              )
+              exit=(pipe
+                  (d3-remove)
+              )
+            )
+          )
+        d3el)
+      }}
+
+      {{/if}}
+
+
+    {{/with}}
+
+{{/with}}
