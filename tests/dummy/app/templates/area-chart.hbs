@@ -1,0 +1,30 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h4>Area Chart Example</h4>
+  </div>
+  <div class="panel-body">
+    <p>
+      This is a basic area chart.
+    </p>
+  </div>
+</div>
+
+<form class="form-inline">
+  <div class="form-group">
+    <label for="randomText">Text</label>
+    {{bs-input id="randomText" type="textarea" value=text placeholder="Type something in" autocomplete="off"}}
+  </div>
+  <div class="form-group">
+    <label for="heightText">Height</label>
+    {{bs-input id="heightText" type="number" min="100" max="1000" step="25" value=height}}
+  </div>
+  <div class="form-group">
+    <label for="widthText">Width</label>
+    {{bs-input id="widthText" type="number" min="100" max="1000" step="25" value=width}}
+  </div>
+</form>
+
+<h2>{{text}}</h2>
+
+
+{{x-chart-area data=text width=width height=height}}
