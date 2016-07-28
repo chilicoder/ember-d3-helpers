@@ -3,5 +3,7 @@
 
 module.exports = {
   name: 'ember-d3-helpers',
-  included: function() {}
+  included: function() {
+    this._super.included.apply(this, arguments);
+  }
 };

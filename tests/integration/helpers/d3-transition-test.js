@@ -17,23 +17,16 @@ test('is applied to selection', function(assert) {
 
   // Template block usage:
   this.render(hbs`
-    <a id="my-link"></a>
-    {{#if ready}}
-      {{shhh (compute (pipe 
-        (d3-select "#my-link")
-        (d3-transition)
-        (d3-style "color" "red")
-        ))
-      }}
-    {{/if}}
+    {{d3-graph (pipe 
+      (d3-transition)
+      (d3-style "color" "red")
+    )}}
   `);
-
-  this.set('ready', true);
 
   // wait for transition
   later(()=> {}, 250);
 
   return wait().then(function(){
-    assert.equal(this.$('#my-link').attr('style'), 'color: rgb(255, 0, 0);');
+    assert.equal(this.$('g').attr('style'), 'color: rgb(255, 0, 0);');
   });
 });
