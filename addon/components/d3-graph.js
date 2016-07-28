@@ -14,4 +14,6 @@ export default Ember.Component.extend({
     let [ el ] = this.$().toArray();
     this.set('selection', select(el));
   }
+}).reopenClass({
+  positionalParams: ['graph']
 });

@@ -11,25 +11,18 @@ test('it renders', function(assert) {
 
   // Template block usage:
   this.render(hbs`
-    <svg></svg>
+    {{d3-graph (pipe
+      (d3-select-all "rect")
+      (d3-data data)
+      (d3-join
+        enter=(pipe
+          (d3-append "rect")
+          (d3-text (r/param))
+        )
+      )
+    )}}
+`);
 
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select "svg")
-          (d3-select-all "rect")
-          (d3-data data)
-          (d3-join
-            enter=(pipe
-              (d3-append "rect")
-              (d3-text (r/param))
-            )
-          )
-        ))
-      }}
-    {{/if}}
-  `);
-
-  this.set('ready', true);
 
   assert.equal(this.$('rect').length, 4, "four rectanges were rendered");
   assert.ok(this.$('rect:contains(red)').length);
@@ -44,32 +37,7 @@ test('it updated', function(assert) {
 
   // Template block usage:
   this.render(hbs`
-<<<<<<< 5b8d7678fb0b0e4a29240db8fb434c4e88daa82e
-    <svg></svg>
-
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select "svg")
-          (d3-select-all "rect")
-          (d3-data data)
-          (d3-join
-            enter=(pipe
-              (d3-append "rect")
-              (d3-text (r/param))
-            )
-            update=(pipe
-              (d3-text (r/param))
-            )
-            exit=(pipe
-              (d3-remove)
-            )
-          )
-        ))
-      }}
-    {{/if}}
-=======
     {{d3-graph (pipe
-      (d3-select 'svg')
       (d3-join 'rect' data
         enter=(pipe
           (d3-append 'rect')
@@ -83,10 +51,7 @@ test('it updated', function(assert) {
         )
       )
     )}}
->>>>>>> Starting to work on d3-join
   `);
-
-  this.set('ready', true);
 
   assert.equal(this.$('rect').length, 4, "four rectanges were rendered");
   assert.ok(this.$('rect:contains(red)').length);
