@@ -44,6 +44,7 @@ test('it updated', function(assert) {
 
   // Template block usage:
   this.render(hbs`
+<<<<<<< 5b8d7678fb0b0e4a29240db8fb434c4e88daa82e
     <svg></svg>
 
     {{#if ready}}
@@ -66,6 +67,23 @@ test('it updated', function(assert) {
         ))
       }}
     {{/if}}
+=======
+    {{d3-graph (pipe
+      (d3-select 'svg')
+      (d3-join 'rect' data
+        enter=(pipe
+          (d3-append 'rect')
+          (d3-text (r/param))
+        )
+        update=(pipe
+          (d3-text (r/param))
+        )
+        exit=(pipe
+          (d3-remove)
+        )
+      )
+    )}}
+>>>>>>> Starting to work on d3-join
   `);
 
   this.set('ready', true);
