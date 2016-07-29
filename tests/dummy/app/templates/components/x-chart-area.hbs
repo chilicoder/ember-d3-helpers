@@ -16,6 +16,9 @@
 
     {{#if d3el}}
 
+
+
+
       {{shh
         (compute
           (pipe
@@ -56,8 +59,30 @@
         d3el)
       }}
 
-      {{/if}}
+      {{!-- create x axis --}}
 
+      {{shhh (compute (pipe
+          (d3-append 'g')
+          (d3-attr 'class' 'x axis')
+          (d3-attr 'transform' (i 'translate(0,${h})' h=height))
+        ) d3el)
+      }}
+
+
+      {{shhh (compute (pipe
+          (d3-select-all '.x.axis')
+          (d3-call scales.xScale)
+          (d3-append 'text')
+          (d3-attr 'fill' 'black')
+          (d3-attr 'y' 6)
+          (d3-attr 'dy' '0.7em')
+          (d3-style 'text-anchor' 'end')
+          (d3-text 'hello')
+
+        ) d3el)
+      }}
+
+      {{/if}}
 
     {{/with}}
 
