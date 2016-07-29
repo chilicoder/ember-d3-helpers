@@ -8,23 +8,15 @@ moduleForComponent('d3-select-all', 'Integration | Helper | d3-select-all', {
 test('selects multiple elements', function(assert) {
   // Template block usage:
   this.render(hbs`
-    <div class="selection-container">
+    {{#d3-graph (pipe
+        (d3-select-all "i.a")
+        (d3-text "matched")
+      )}}
       <i class="a"></i>
       <i class="a b"></i>
       <i class="b c"></i>
-    </div>
-
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select ".selection-container")
-          (d3-select-all "i.a")
-          (d3-text "matched")
-        ))
-      }}
-    {{/if}}
+    {{/d3-graph}}
   `);
-
-  this.set('ready', true);
 
   assert.ok(this.$('i.a:contains(matched)').length);
   assert.ok(this.$('i.a.b:contains(matched)').length);  
@@ -37,23 +29,17 @@ test('selection changes when selector is changed', function(assert){
 
   // Template block usage:
   this.render(hbs`
-    <div class="selection-container">
+    {{#d3-graph (pipe
+      (d3-select ".selection-container")
+      (d3-select selector)
+      (d3-text "matched")
+    )}}
       <i class="a"></i>
       <i class="a"></i>
       <i class="b"></i>
       <i class="b"></i>
-    </div>    
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select ".selection-container")
-          (d3-select selector)
-          (d3-text "matched")
-        ))
-      }}
-    {{/if}}
+    {{/d3-graph}}
   `);
-
-  this.set('ready', true);
 
   assert.ok(this.$('.a:contains(matched)').length);
   assert.ok(this.$('.a:contains(matched)').length);  

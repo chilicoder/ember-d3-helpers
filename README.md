@@ -17,6 +17,7 @@ Currently, there are no configuration options for this addon in `config/environm
 You can view a demo of a few ways to use these helpers [here](http://locusenergy.github.io/ember-d3-helpers)
 
 ## Available Helpers
+* [`d3-graph`](#d3-graph)
 * [Selection Helpers]
   - [`d3-select`](#d3-select)
   - [`d3-select-all`](#d3-select-all)
@@ -44,6 +45,34 @@ You can view a demo of a few ways to use these helpers [here](http://locusenergy
 
 ## Usage
 
+### `{{d3-graph graph}}`
+
+`d3-graph` is the only component in this addon. It's used to provide root level 
+selection to render discrete D3 elements, such as SVG `<svg>` and groups `<g>`. 
+You can change this with by specifying the component's `tagName` 
+(ie `{{d3-graph (pipe ...) tagName="svg"}}`).
+
+It can be used inline.
+
+```hbs
+{{d3-graph (pipe 
+  (d3-attr "name" "fred")
+)}}
+```
+
+Or as a block component.
+
+```hbs
+{{#d3-graph (pipe
+  (d3-select-all "rect")
+  (d3-attr "name" "fred")
+)}}
+  <rect></rect>
+{{/d3-graph}}
+```
+
+The template in the block becomes the initial DOM for this graph. 
+
 ### Selection Helpers
 
 #### `(d3-select selector)`
@@ -52,11 +81,10 @@ You can view a demo of a few ways to use these helpers [here](http://locusenergy
 Select an element matching selector and return a selection object.
 
 ```hbs
-{{shhh (compute (pipe 
+{{d3-graph (pipe 
   (d3-select "#my-link")
   (d3-attr "name" "fred")
-  ))
-}}
+)}}
 ```
 
 #### `(d3-select-all selector)`
@@ -65,12 +93,11 @@ Select an element matching selector and return a selection object.
 Selects all elements that match the specified selector string.
 
 ```hbs
-{{shhh (compute (pipe
-    (d3-select-all "rect")
-    (d3-join data)
-    (d3-style "color" "red")
-  ))
-}}
+{{d3-graph (pipe
+  (d3-select-all "rect")
+  (d3-join data)
+  (d3-style "color" "red")
+)}}
 ```
 
 #### `(d3-data data [key])`
@@ -79,18 +106,16 @@ Selects all elements that match the specified selector string.
 Joins the specified array of data with the selected elements, returning a new selection that it represents the update selection: the elements successfully bound to data.
 
 ```hbs
-{{shhh (compute (pipe
-    (d3-select "svg")
-    (d3-select-all "rect")
-    (d3-data data key)
-    (d3-join 
-      enter=(pipe
-        (d3-append "rect")
-        (d3-text (r/get "number"))
-      )
+{{d3-graph (pipe
+  (d3-select-all "rect")
+  (d3-data data key)
+  (d3-join 
+    enter=(pipe
+      (d3-append "rect")
+      (d3-text (r/get "number"))
     )
-  ))
-}}
+  )
+)}}
 ```
 
 #### `(d3-join selector data accessor [enter=] [update=] [exit=])`
@@ -101,24 +126,23 @@ this helper represents a pattern rather than a specific function in the API. Use
 Read more about [D3's General Update Pattern](https://bl.ocks.org/mbostock/3808218). 
 
 ```hbs
-{{shhh (compute (pipe
-    (d3-select "svg")
-    (d3-select-all "rect")
-    (d3-data data)
-    (d3-join
-      enter=(pipe
-        (d3-append "rect")
-        (d3-text (r/param))
-      )
-      update=(pipe
-        (d3-text (r/param))
-      )
-      exit=(pipe
-        (d3-remove)
-      )
+{{d3-graph (pipe
+  (d3-select "svg")
+  (d3-select-all "rect")
+  (d3-data data)
+  (d3-join
+    enter=(pipe
+      (d3-append "rect")
+      (d3-text (r/param))
     )
-  ))
-}}
+    update=(pipe
+      (d3-text (r/param))
+    )
+    exit=(pipe
+      (d3-remove)
+    )
+  )
+)}}
 ```
 
 #### `(d3-attr name value)`
@@ -127,11 +151,10 @@ Read more about [D3's General Update Pattern](https://bl.ocks.org/mbostock/38082
 Set attribute with specified name to specified value. Value can be a string or a function.
 
 ```hbs
-{{shhh (compute (pipe
-    (d3-select ".myelement")
-    (d3-attr "name" name)
-  ))
-}}
+{{d3-graph (pipe
+  (d3-select ".myelement")
+  (d3-attr "name" name)
+)}}
 ```
 
 #### `(d3-call (pipe ...))`
@@ -140,20 +163,19 @@ Set attribute with specified name to specified value. Value can be a string or a
 Invokes the specified function exactly once, passing in this selection along with any optional arguments.
 
 ```hbs
-{{shhh (compute (pipe 
-    (d3-select ".test-items")
-    (d3-call (pipe 
-      (d3-select-all ".car")
-      (d3-attr "color" "red")
-    ))
-    (d3-call (pipe
-      (d3-select-all ".boat")
-      (d3-attr "color" "blue")
-    ))
-    (d3-append 'i')
-    (d3-attr "class" "truck")
+{{d3-graph (pipe 
+  (d3-select ".test-items")
+  (d3-call (pipe 
+    (d3-select-all ".car")
+    (d3-attr "color" "red")
   ))
-}}
+  (d3-call (pipe
+    (d3-select-all ".boat")
+    (d3-attr "color" "blue")
+  ))
+  (d3-append 'i')
+  (d3-attr "class" "truck")
+)}}
 ```
 
 ### Transition Helpers
@@ -164,14 +186,17 @@ Invokes the specified function exactly once, passing in this selection along wit
 Apply transition to a selection. Transition can be a name for this transition or a parent transition. 
 
 ```hbs
-{{d3-join 'rect' data
-  enter=(pipe
-    (d3-append 'rect')
-    (d3-attr height)
-    (d3-transition)
-    (d3-attr (r/get 'y'))
-  )
-}}
+{{d3-graph (pipe 
+  (d3-select-all "rect")
+  (d3-data data)
+  (d3-join
+    enter=(pipe
+      (d3-append "rect")
+      (d3-attr height)
+      (d3-transition)
+      (d3-attr (r/get "y"))
+  ))
+)}}
 ```
 
 #### `(d3-transition-delay amount)`
@@ -180,15 +205,16 @@ Apply transition to a selection. Transition can be a name for this transition or
 Apply a delay to a transition. Must be chained behind a transition.
 
 ```hbs
-{{d3-join 'rect' data
-  enter=(pipe
-    (d3-append 'rect')
-    (d3-attr height)
-    (d3-transition)
-    (d3-delay 300)
-    (d3-attr (r/get 'y'))
-  )
-}}
+{{d3-graph (pipe 
+  (d3-join
+    enter=(pipe
+      (d3-append "rect")
+      (d3-attr height)
+      (d3-transition)
+      (d3-delay 300)
+      (d3-attr (r/get "y"))
+  ))
+)}}
 ```
 
 #### `(d3-attr-tween)`

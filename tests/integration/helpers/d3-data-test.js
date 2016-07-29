@@ -10,25 +10,17 @@ test('provides data', function(assert) {
   this.set('data', ['red', 'blue', 'yellow']);
   // Template block usage:
   this.render(hbs`
-    <svg></svg>
-
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select "svg")
-          (d3-select-all "rect")
-          (d3-data data)
-          (d3-join 
-            enter=(pipe
-              (d3-append "rect")
-              (d3-text (r/param))
-            )
-          )
-        ))
-      }}
-    {{/if}}
+    {{d3-graph (pipe 
+      (d3-select-all "rect")
+      (d3-data data)
+      (d3-join 
+        enter=(pipe
+          (d3-append "rect")
+          (d3-text (r/param))
+        )
+      )
+    )}}
   `);
-
-  this.set('ready', true);
 
   assert.equal(this.$('rect').length, 3, "three rect's are rendred");
   assert.equal(this.$().text().trim(), 'redblueyellow', "text is rendered");
@@ -40,31 +32,23 @@ test('updates when data changes', function(assert) {
   this.set('data', ['red', 'blue', 'yellow']);
   // Template block usage:
   this.render(hbs`
-    <svg></svg>
-
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select "svg")
-          (d3-select-all "rect")
-          (d3-data data)
-          (d3-join 
-            enter=(pipe
-              (d3-append "rect")
-              (d3-text (r/param))
-            )
-            update=(pipe
-              (d3-text (r/param))
-            )
-            exit=(pipe
-              (d3-remove)
-            )
-          )
-        ))
-      }}
-    {{/if}}
+    {{d3-graph (pipe
+      (d3-select-all "rect")
+      (d3-data data)
+      (d3-join 
+        enter=(pipe
+          (d3-append "rect")
+          (d3-text (r/param))
+        )
+        update=(pipe
+          (d3-text (r/param))
+        )
+        exit=(pipe
+          (d3-remove)
+        )
+      )
+    )}}
   `);
-
-  this.set('ready', true);
 
   assert.equal(this.$('rect').length, 3, "three rect's are rendred");
   assert.equal(this.$().text().trim(), 'redblueyellow', "text is rendered");
@@ -102,33 +86,25 @@ test('can get data from data function', function(assert){
  */
 
   this.render(hbs`
-    <div id="table-container"></div>
-
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select "#table-container")
-          (d3-append "table")
-          (d3-select-all "tr")
-          (d3-data data)
-          (d3-call (d3-join
+    {{d3-graph (pipe 
+      (d3-append "table")
+      (d3-select-all "tr")
+      (d3-data data)
+      (d3-call (d3-join
+        enter=(pipe
+          (d3-append "tr")
+          (d3-select-all "td")
+          (d3-data (r/param))
+          (d3-join
             enter=(pipe
-              (d3-append "tr")
-              (d3-select-all "td")
-              (d3-data (r/param))
-              (d3-join
-                enter=(pipe
-                  (d3-append "td")
-                  (d3-text (r/param))
-                )
-              )
+              (d3-append "td")
+              (d3-text (r/param))
             )
-          ))
-        ))
-      }}
-    {{/if}}
+          )
+        )
+      ))
+    ) tagName="div"}}
   `);
-
-  this.set('ready', true);
 
   assert.deepEqual(text(this.$('tr:eq(0) td')), [11975,  5871, 8916, 2868]);
   assert.deepEqual(text(this.$('tr:eq(1) td')), [ 1951, 10048, 2060, 6171]);
@@ -167,25 +143,17 @@ test('can provide custom key', function(assert) {
  */
 
   this.render(hbs`
-    <svg></svg>
-
-    {{#if ready}}
-      {{shhh (compute (pipe
-          (d3-select "svg")
-          (d3-select-all "rect")
-          (d3-data data key)
-          (d3-join 
-            enter=(pipe
-              (d3-append "rect")
-              (d3-text (r/get "number"))
-            )
-          )
-        ))
-      }}
-    {{/if}}
+    {{d3-graph (pipe
+      (d3-select-all "rect")
+      (d3-data data key)
+      (d3-join 
+        enter=(pipe
+          (d3-append "rect")
+          (d3-text (r/get "number"))
+        )
+      )
+    )}}
   `);
-
-  this.set('ready', true);
 
   assert.equal(this.$('rect').length, 6, "six rect are rendred");
   assert.equal(this.$().text().trim(), '4815163134', "numbers are rendered");
