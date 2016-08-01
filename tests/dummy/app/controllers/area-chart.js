@@ -40,14 +40,6 @@ export default Controller.extend({
   }),
 
 
-  viewBox: computed( 'conatinerHeight', 'containerWidth', function() {
-    const width  = this.get( 'containerWidth' );
-    const height = this.get( 'containerHeight' );
-
-    return [ 0, 0, width, height ];
-  }),
-
-
   xKey( d ) {
     return d.char;
   },
