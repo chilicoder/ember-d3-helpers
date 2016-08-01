@@ -23,18 +23,18 @@ export default Controller.extend({
 
 
   containerWidth: computed( 'width', 'margin.right', 'margin.left', function() {
-    const width = this.get( 'width' );
-    const left  = this.get( 'margin.left' );
-    const right = this.get( 'margin.right' );
+    const width = +this.get( 'width' );
+    const left  = +this.get( 'margin.left' );
+    const right = +this.get( 'margin.right' );
 
     return width + left + right;
   }),
 
 
   containerHeight: computed( 'height', 'margin.top', 'margin.bottom', function() {
-    const height = this.get( 'height' );
-    const top    = this.get( 'margin.top' );
-    const bottom = this.get( 'margin.bottom' );
+    const height = +this.get( 'height' );
+    const top    = +this.get( 'margin.top' );
+    const bottom = +this.get( 'margin.bottom' );
 
     return height + top + bottom;
   }),
