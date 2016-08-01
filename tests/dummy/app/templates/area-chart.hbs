@@ -24,7 +24,88 @@
   </div>
 </form>
 
+
 <h2>{{text}}</h2>
 
 
-{{x-chart-area data=text width=width height=height}}
+<svg
+  width="{{containerWidth}}"
+  height="{{containerHeight}}"
+>
+
+  {{#with (letter-frequency text) as |letters|}}
+
+    {{#d3-graph
+      (d3-attr 'transform' (i 'translate(${x}, ${y})' x=margin.left y=margin.top))
+      as |selection|
+    }}
+
+        {{#with
+          (hash
+            xScale=(point-scale
+              (compute xDomain letters)
+              (append 0 width)
+            )
+            yScale=(linear-scale
+              (append 0 10)
+              (append height 0)
+            )
+          ) as |scales|
+        }}
+
+          {{d3-graph
+            (pipe
+              (d3-select-all 'path')
+              (d3-data (array letters))
+              (d3-join
+                enter=(pipe
+                  (d3-append 'path')
+                  (d3-attr 'class' 'area')
+                  (d3-style 'fill' 'steelblue')
+                  (d3-attr 'd'
+                    (d3-area
+                      scales.xScale
+                      scales.yScale
+                      xKey=xKey
+                      yKey=yKey
+                    )
+                  )
+                )
+                update=(pipe
+                    (d3-attr 'class' 'area')
+                    (d3-style 'fill' 'steelblue')
+                    (d3-attr 'd'
+                      (d3-area
+                        scales.xScale
+                        scales.yScale
+                        xKey=xKey
+                        yKey=yKey
+                      )
+                    )
+                )
+                exit=(pipe (d3-remove))
+              )
+            )
+          }}
+
+          {{d3-graph
+            (pipe
+              (d3-attr 'transform' (i 'translate(${x}, ${y})' x=0 y=height))
+              (d3-call (compute xAxis scales.xScale))
+            )
+          }}
+
+
+          {{d3-graph
+            (pipe
+              (d3-call (compute yAxis scales.yScale))
+            )
+          }}
+
+        {{/with}} {{!-- scale hash --}}
+
+    {{/d3-graph}}
+
+  {{/with}} {{!-- letters --}}
+
+</svg>
