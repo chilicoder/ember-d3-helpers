@@ -9,7 +9,6 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('bar-chart');
   this.route('color-picker');
-  this.route('area-chart');
 });
 
 export default Router;
