@@ -8,8 +8,8 @@ const { K } = Ember;
 
 test('it works', function(assert) {
   let options = {
-    xKey: K,
-    yKey: K
+    xAccessor: K,
+    yAccessor: K
   };
 
   let area = d3Area([K, K], options);
