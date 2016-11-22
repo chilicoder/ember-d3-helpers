@@ -31,6 +31,11 @@ Checkout [`ember-sparkles`](https://github.com/LocusEnergy/ember-sparkles) to se
   - [`d3-join`](#d3-join)
   - [`d3-attr`](#d3-attr)
   - [`d3-call`](#d3-call)
+* [Shape helpers](#selection-helpers)
+  - [`d3-arc`](#d3-arc)
+  - [`d3-area`](#d3-area)
+  - [`d3-line`](#d3-line)  
+  - [`d3-pie`](#d3-pie)
 * [Transition Helpers](#transition-helpers)
   - [`d3-transition`](#d3-transition)
   - [`d3-transition-delay`](#d3-transition-delay)
@@ -248,6 +253,50 @@ Invokes the specified function exactly once, passing in this selection along wit
 ```
 
 ----------
+
+
+### Shape Helpers
+
+### `(d3-arc params {innerRadius, outerRadius, startAngle, endAngle})`
+[D3 Arc](https://github.com/d3/d3-shape/blob/master/README.md#arcs)
+
+The arc generator produces a circular or annular sector, as in a pie or donut chart.
+
+
+### `(d3-area [xScale, yScale] {xAccessor, yAccessor})`
+[D3 Arc](https://github.com/d3/d3-shape/blob/master/README.md#areas)
+
+The area generator produces an area, as in an area chart.
+
+```hbs
+{{d3-graph
+  (pipe
+    (d3-select-all 'path')
+    (d3-data data)
+    (d3-join
+      enter=(pipe
+        (d3-append 'path')
+        (d3-attr 'd'
+          (d3-area
+            xScale
+            yScale
+            xAccessor=(d3-get 'x')
+            yAccessor=(d3-get 'y')
+          )
+        )
+      )
+    )
+  )
+}}
+```
+
+### `(d3-line [xScale, yScale] {xAccessor, yAccessor})`
+[D3 Arc](https://github.com/d3/d3-shape/blob/master/README.md#lines)
+
+The line generator produces a spline or polyline, as in a line chart.
+
+----------
+
 
 ### Transition Helpers
 
