@@ -40,7 +40,6 @@
     "ember-data": "^2.9.0-beta.1",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
-    "ember-interpolate-helper": "1.0.0",
     "ember-load-initializers": "^0.5.1",
     "ember-lodash": "0.0.6",
     "ember-resolver": "^2.0.3",
