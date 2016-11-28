@@ -26,13 +26,16 @@ Checkout [`ember-sparkles`](https://github.com/LocusEnergy/ember-sparkles) to se
 
 ## Helpers
 * [Selection Helpers](#selection-helpers)
-  - [`d3-select`](#d3-select-selector)
-  - [`d3-select-all`](#d3-select-all-selector)
-  - [`d3-data`](#d3-data-data-key)
-  - [`d3-join`](#d3-join-enter-update-exit)
-  - [`d3-attr`](#d3-attr-name-value)
-  - [`d3-call`](#d3-call-pipe-)
-  - [`d3-on`](#d3-on-typenames-listener-capture)
+  - [`d3-select`](#d3-select)
+  - [`d3-select-all`](#d3-select-all)
+  - [`d3-join`](#d3-join)
+  - [`d3-attr`](#d3-attr)
+  - [`d3-call`](#d3-call)
+* [Shape helpers](#shape-helpers)
+  - [`d3-arc`](#d3-arc)
+  - [`d3-area`](#d3-area)
+  - [`d3-line`](#d3-line)  
+  - [`d3-pie`](#d3-pie)
 * [Transition Helpers](#transition-helpers)
   - [`d3-transition`](#d3-transition-transition)
   - [`d3-transition-delay`](#d3-transition-delay-amount)
@@ -270,6 +273,50 @@ An optional _capture_ flag may be specified which corresponds to the W3C
 ```
 
 ----------
+
+
+### Shape Helpers
+
+### `(d3-arc params {innerRadius, outerRadius, startAngle, endAngle})`
+[D3 Arc](https://github.com/d3/d3-shape/blob/master/README.md#arcs)
+
+The arc generator produces a circular or annular sector, as in a pie or donut chart.
+
+
+### `(d3-area [xScale, yScale] {xAccessor, yAccessor})`
+[D3 Areas](https://github.com/d3/d3-shape/blob/master/README.md#areas)
+
+The area generator produces an area, as in an area chart.
+
+```hbs
+{{d3-graph
+  (pipe
+    (d3-select-all 'path')
+    (d3-data data)
+    (d3-join
+      enter=(pipe
+        (d3-append 'path')
+        (d3-attr 'd'
+          (d3-area
+            xScale
+            yScale
+            xAccessor=(d3-get 'x')
+            yAccessor=(d3-get 'y')
+          )
+        )
+      )
+    )
+  )
+}}
+```
+
+### `(d3-line [xScale, yScale] {xAccessor, yAccessor})`
+[D3 Lines](https://github.com/d3/d3-shape/blob/master/README.md#lines)
+
+The line generator produces a spline or polyline, as in a line chart.
+
+----------
+
 
 ### Transition Helpers
 
