@@ -31,7 +31,7 @@ Checkout [`ember-sparkles`](https://github.com/LocusEnergy/ember-sparkles) to se
   - [`d3-join`](#d3-join)
   - [`d3-attr`](#d3-attr)
   - [`d3-call`](#d3-call)
-* [Shape helpers](#selection-helpers)
+* [Shape helpers](#shape-helpers)
   - [`d3-arc`](#d3-arc)
   - [`d3-area`](#d3-area)
   - [`d3-line`](#d3-line)  
@@ -264,7 +264,7 @@ The arc generator produces a circular or annular sector, as in a pie or donut ch
 
 
 ### `(d3-area [xScale, yScale] {xAccessor, yAccessor})`
-[D3 Arc](https://github.com/d3/d3-shape/blob/master/README.md#areas)
+[D3 Areas](https://github.com/d3/d3-shape/blob/master/README.md#areas)
 
 The area generator produces an area, as in an area chart.
 
@@ -291,7 +291,7 @@ The area generator produces an area, as in an area chart.
 ```
 
 ### `(d3-line [xScale, yScale] {xAccessor, yAccessor})`
-[D3 Arc](https://github.com/d3/d3-shape/blob/master/README.md#lines)
+[D3 Lines](https://github.com/d3/d3-shape/blob/master/README.md#lines)
 
 The line generator produces a spline or polyline, as in a line chart.
 
