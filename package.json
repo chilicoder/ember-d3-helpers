@@ -1,6 +1,6 @@
 {
   "name": "ember-d3-helpers",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "description": "Glimmer Template helpers using the D3v4 API",
   "keywords": [
     "ember-addon"
@@ -21,7 +21,6 @@
     "test": "ember try:each",
     "deploy": "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push; git checkout -"
   },
-
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^2.4.1",
@@ -48,7 +47,6 @@
     "ember-sinon": "0.5.1",
     "loader.js": "^4.0.10"
   },
-
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
     "ember-cli-htmlbars": "^1.0.10",
