@@ -149,7 +149,7 @@ _optional_
 
 ### Selection Helpers
 
-#### `(d3-select selector)`[#d3-select]
+#### `(d3-select selector)`[d3-select]
 [D3 Select](https://github.com/d3/d3-selection#select)
 
 Select an element matching selector and return a selection object.
