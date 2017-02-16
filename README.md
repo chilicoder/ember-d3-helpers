@@ -149,7 +149,7 @@ _optional_
 
 ### Selection Helpers
 
-#### `(d3-select selector)`
+#### `(d3-select selector)`[#d3-select]
 [D3 Select](https://github.com/d3/d3-selection#select)
 
 Select an element matching selector and return a selection object.
@@ -161,7 +161,7 @@ Select an element matching selector and return a selection object.
 )}}
 ```
 
-#### `(d3-select-all selector)`
+#### `(d3-select-all selector)`[d3-select-all]
 [D3 Select All](https://github.com/d3/d3-selection#selectAll)
 
 Selects all elements that match the specified selector string.
