@@ -2,7 +2,9 @@
   "name": "ember-d3-helpers",
   "version": "0.5.17",
   "description": "Glimmer Template helpers using the D3v4 API",
-  "keywords": ["ember-addon"],
+  "keywords": [
+    "ember-addon"
+  ],
   "license": "MIT",
   "author": "spencer516, zigahertz, embersherpa",
   "directories": {
@@ -17,8 +19,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:each",
-    "deploy":
-      "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push; git checkout -"
+    "deploy": "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\"; git push; git checkout -"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
