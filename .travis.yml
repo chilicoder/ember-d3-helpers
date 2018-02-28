@@ -1,18 +1,15 @@
 ---
+sudo: false
+dist: trusty
 language: node_js
 node_js:
   - "6"
-
-sudo: required
-dist: trusty
 
 addons:
   chrome: stable
 
 cache:
   yarn: true
-     directories:
-       - bower_components
 
 # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
 env:
@@ -40,7 +37,6 @@ before_install:
   - yarn global add bower
 
 install:
-
   - yarn install --no-lockfile --non-interactive
   - bower install
 
