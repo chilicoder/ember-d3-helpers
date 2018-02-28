@@ -1,5 +1,6 @@
 /*jshint node:true*/
 module.exports = {
+  useVersionCompatibility: true,
   scenarios: [
     {
       name: 'ember-lts-2.4',
@@ -20,6 +21,28 @@ module.exports = {
         },
         resolutions: {
           'ember': 'lts-2-8'
+        }
+      }
+    },
+    {
+      name: 'ember-lts-2.12',
+      bower: {
+        dependencies: {
+          'ember': 'components/ember#lts-2-12'
+        },
+        resolutions: {
+          'ember': 'lts-2-12'
+        }
+      }
+    },
+    {
+      name: 'ember-lts-2.16',
+      bower: {
+        dependencies: {
+          'ember': 'components/ember#lts-2-16'
+        },
+        resolutions: {
+          'ember': 'lts-2-16'
         }
       }
     },

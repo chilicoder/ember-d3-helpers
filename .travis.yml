@@ -11,6 +11,8 @@ addons:
 
 cache:
   yarn: true
+     directories:
+       - bower_components
 
 # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
 env:
@@ -33,9 +35,12 @@ matrix:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
+  - yarn global add bower
 
 install:
+
   - yarn install --no-lockfile --non-interactive
+  - bower install
 
 script:
   # Usually, it's ok to finish the test scenario without reverting
