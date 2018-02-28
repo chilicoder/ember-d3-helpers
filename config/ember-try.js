@@ -30,6 +30,11 @@ module.exports = {
         devDependencies: {
           'ember-source': '~2.12.0'
         }
+      },
+      bower: {
+        dependencies: {
+          'ember': null
+        },
       }
     },
     {
@@ -38,6 +43,11 @@ module.exports = {
         devDependencies: {
           'ember-source': '~2.16.0'
         }
+      },
+      bower: {
+        dependencies: {
+          'ember': null
+        },
       }
     },
     {
